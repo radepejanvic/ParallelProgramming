@@ -4,10 +4,9 @@
 #include <map>
 #include <fstream>
 #include <sstream>
-
-#define INPUT_FILE "expressions.txt"
-#define SERIAL_FILE "serial.csv"
-#define PARALLEL_FILE "parallel.csv"
+#include <iostream>
+#include <string>
+#include <chrono>
 
 class Comparator {
 
@@ -18,9 +17,11 @@ public:
 	Comparator();
 	~Comparator();
 
-	void loadRounds();
+	void loadRounds(std::string filename);
 	void runSerial();
 	void runParallel();
 };
 
-void serialize(int time);
+void serialize(int round, double duration, std::string filename);
+
+void filterSlow(const std::vector<float>& numbers, float result, std::string filename);

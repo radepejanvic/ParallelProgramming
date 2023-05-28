@@ -1,5 +1,6 @@
 //#include "Computer.h"
 #include "Game.h"
+#include "Comparator.h"
 //#include "Calculator.h"
 
 std::string pickInputFile() {	
@@ -23,7 +24,11 @@ std::string pickInputFile() {
 }
 
 int main() {
-	std::string filename = pickInputFile();
+	/*std::string filename = pickInputFile();
 	Game g(filename);
-	g.play();
+	g.play();*/
+
+	Comparator comparator;
+	comparator.loadRounds("input.txt");
+	comparator.runSerial();
 }
