@@ -46,12 +46,19 @@ public:
 	// generisanje varijacija sa ponavljanjem skupa operacija na 5 poziciji
 	float variations5(std::vector<float>& nums);
 
+	float parallel_variations1(std::vector<float> nums);
+
+	void task_variations1(std::vector<float> nums, int& current, bool& is_found);
+
+	float parallel_variations2(std::vector<float> nums);
+
+	void task_variations2(std::vector<float> nums, int& current, bool& is_found);
 
 	float parallel_variations4(std::vector<float> nums);
 
 	float parallel_variations5(std::vector<float> nums);
 
-	void task_variations4(std::vector<float> nums, int& current, tbb::task_group& g);
+	float task_variations4(std::vector<float> nums);
 
 
 	void printSolution();

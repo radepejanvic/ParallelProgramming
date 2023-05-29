@@ -30,6 +30,6 @@ int main() {
 
 	Comparator comparator;
 	comparator.loadRounds("tester.txt");
-	comparator.runSerial();
-	//comparator.runParallel();
+	//comparator.runSerial();
+	comparator.runParallel();
 }
