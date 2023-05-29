@@ -53,6 +53,7 @@ void Computer::parallel_combinations() {
                 }
             }
             if (parallel_variations(combination) == result) {
+                return;
             }
         } while (std::next_permutation(v.begin(), v.end()));
     }
@@ -310,7 +311,8 @@ float Computer::parallel_variations4(std::vector<float> nums) {
     bool is_found = false;
 
     do {
-        g.run([&] { task_variations4(nums, current, is_found); });
+
+        g.run([&] { task_variations4(nums, current, g); });
 
     } while (std::next_permutation(nums.begin(), nums.end()));
 
@@ -375,7 +377,7 @@ float Computer::parallel_variations5(std::vector<float> nums) {
     return -1;
 }
 
-void Computer::task_variations4(std::vector<float> nums, int& current, bool& is_found)
+void Computer::task_variations4(std::vector<float> nums, int& current, tbb::task_group& g)
 {
     int current_result = 0;
     std::vector<float> expression;
@@ -390,8 +392,6 @@ void Computer::task_variations4(std::vector<float> nums, int& current, bool& is_
                     expression = { nums[0], operations[i], nums[1], operations[j], nums[2], operations[k], nums[3], operations[l], nums[4] };
                     try {
 
-                        if (is_found) { return; }
-
                         C.clear();
                         current_result = C.calc(expression, 0);
                         if (current_result == ERROR) {
@@ -400,7 +400,7 @@ void Computer::task_variations4(std::vector<float> nums, int& current, bool& is_
                         else if (current_result == result) {
                             //std::cout << "BROJ ITERACIJA 4 -> " << number_of_iter << " RESENJE: " << current << std::endl;
                             solution.assign(expression.begin(), expression.end());
-                            is_found = true;
+                            g.cancel();
                             current = current_result;
                             return;
                         }

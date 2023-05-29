@@ -51,7 +51,7 @@ public:
 
 	float parallel_variations5(std::vector<float> nums);
 
-	void task_variations4(std::vector<float> nums, int& current, bool& is_found);
+	void task_variations4(std::vector<float> nums, int& current, tbb::task_group& g);
 
 
 	void printSolution();
