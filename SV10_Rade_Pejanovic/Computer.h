@@ -33,6 +33,8 @@ public:
 	// racunanje vrednosti izraza -> ukoliko se naidje na tacan, odnosno na onaj koji je jednak 'result' promenljivoj
 	// prekidaju se sve funckije i zapisuje se u promenljivu solution
 	float variations(std::vector<float>& nums);
+
+	float parallel_variations(std::vector<float>& nums);
 	// generisanje varijacija sa ponavljanjem skupa operacija na 1 poziciji
 	float variations1(std::vector<float>& nums);
 	// generisanje varijacija sa ponavljanjem skupa operacija na 2 poziciji
@@ -43,6 +45,14 @@ public:
 	float variations4(std::vector<float>& nums);
 	// generisanje varijacija sa ponavljanjem skupa operacija na 5 poziciji
 	float variations5(std::vector<float>& nums);
+
+
+	float parallel_variations4(std::vector<float> nums);
+
+	float parallel_variations5(std::vector<float> nums);
+
+	void task_variations4(std::vector<float> nums, int& current, bool& is_found);
+
 
 	void printSolution();
 
