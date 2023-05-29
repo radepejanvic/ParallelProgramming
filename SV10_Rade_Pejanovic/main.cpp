@@ -29,6 +29,7 @@ int main() {
 	g.play();*/
 
 	Comparator comparator;
-	comparator.loadRounds("input.txt");
-	comparator.runSerial();
+	comparator.loadRounds("tester.txt");
+	//comparator.runSerial();
+	comparator.runParallel();
 }

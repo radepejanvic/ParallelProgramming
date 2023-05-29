@@ -34,6 +34,35 @@ void Computer::combinations() {
     }
 }
 
+void Computer::parallel_combinations() {
+    tbb::task_group g;
+
+    for (int p = 1; p <= numbers.size(); p++) {
+        std::vector<bool> v(numbers.size());
+        std::fill(v.begin(), v.end() - p, false);
+        std::fill(v.end() - p, v.end(), true);
+
+        g.run([&]() {
+            std::vector<float> combination;
+
+            do {
+                combination.clear();
+                for (int i = 0; i < numbers.size(); ++i) {
+                    if (v[i]) {
+                        combination.push_back(numbers[i]);
+                    }
+                }
+                if (variations(combination) == result) {
+                    g.cancel();
+                }
+            } while (std::next_permutation(v.begin(), v.end()));
+            });
+    }
+
+    g.wait();
+}
+
+
 float Computer::variations(std::vector<float>& nums) {
     switch (nums.size()) {
     case 2: 
@@ -166,6 +195,9 @@ float Computer::variations3(std::vector<float>& nums) {
 float Computer::variations4(std::vector<float>& nums) {
     std::vector<float> expression;
     // trenutni rezultat 
+
+    int number_of_iter = 0;
+
     float current;
     Calculator<float> C;
     do {
@@ -173,6 +205,9 @@ float Computer::variations4(std::vector<float>& nums) {
             for (auto j = operations.cbegin(); j != operations.cend(); j++) {
                 for (auto k = operations.cbegin(); k != operations.cend(); k++) {
                     for (auto l = operations.cbegin(); l != operations.cend(); l++) {
+                       
+                        ++number_of_iter;
+
                         expression.clear();
                         expression = { nums[0], *i, nums[1], *j, nums[2], *k, nums[3], *l, nums[4] };
                         try {
@@ -182,7 +217,7 @@ float Computer::variations4(std::vector<float>& nums) {
                                 continue;
                             }
                             else if (current == result) {
-                                //std::cout << "KRAAAAJ -> " << current << std::endl;
+                                std::cout << "BROJ ITERACIJA 4 -> " << number_of_iter << " RESENJE: " << current << std::endl;
                                 solution.assign(expression.begin(), expression.end());
                                 return current;
                             }
@@ -207,6 +242,9 @@ float Computer::variations4(std::vector<float>& nums) {
 float Computer::variations5(std::vector<float>& nums) {
     std::vector<float> expression;
     // trenutni rezultat 
+
+    int number_of_iter = 0;
+
     float current;
     Calculator<float> C;
     do {
@@ -215,6 +253,7 @@ float Computer::variations5(std::vector<float>& nums) {
                 for (auto k = operations.cbegin(); k != operations.cend(); k++) {
                     for (auto l = operations.cbegin(); l != operations.cend(); l++) {
                         for (auto m = operations.cbegin(); m != operations.cend(); m++) {
+                            ++number_of_iter;
                             expression.clear();
                             expression = { nums[0], *i, nums[1], *j, nums[2], *k, nums[3], *l, nums[4], *m, nums[5] };
                             try {
@@ -224,7 +263,7 @@ float Computer::variations5(std::vector<float>& nums) {
                                     continue;
                                 }
                                 else if (current == result) {
-                                    //std::cout << "KRAAAAJ -> " << current << std::endl;
+                                    std::cout << "BROJ ITERACIJA 5 -> " << number_of_iter << " RESENJE: " << current << std::endl;
                                     solution.assign(expression.begin(), expression.end());
                                     return current;
                                 }

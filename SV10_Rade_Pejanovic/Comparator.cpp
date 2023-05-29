@@ -49,8 +49,39 @@ void Comparator::runSerial()
 
         Computer  computer(rounds[round], expected);
 
-        auto start = std::chrono::high_resolution_clock::now();
+        //auto start = std::chrono::high_resolution_clock::now();
         computer.combinations();
+        //auto end = std::chrono::high_resolution_clock::now();
+
+        calculator.clear();
+        calculated = calculator.calc(computer.solution, 0);
+        std::cout << "Resenje runde " << round << " je: " << calculated << std::endl;
+
+        /*duration = (end - start);
+        serialize(round, duration.count(), "serial.csv");*/
+
+        /*if (duration.count() > 20) {
+            filterSlow(rounds[round], calculated, "slow.txt");
+        }*/
+    }
+}
+
+void Comparator::runParallel()
+{
+    float expected;
+    float calculated;
+    std::chrono::duration<double> duration;
+
+    for (int round = 0; round < rounds.size(); round++) {
+
+        calculator.clear();
+        expected = rounds[round].back();
+        rounds[round].pop_back();
+
+        Computer  computer(rounds[round], expected);
+
+        auto start = std::chrono::high_resolution_clock::now();
+        computer.parallel_combinations();
         auto end = std::chrono::high_resolution_clock::now();
 
         calculator.clear();
@@ -58,16 +89,12 @@ void Comparator::runSerial()
         std::cout << "Resenje runde " << round << " je: " << calculated << std::endl;
 
         duration = (end - start);
-        serialize(round, duration.count(), "serial.csv");
+        serialize(round, duration.count(), "parallel.csv");
 
-        if (duration.count() > 20) {
+        /*if (duration.count() > 20) {
             filterSlow(rounds[round], calculated, "slow.txt");
-        }
+        }*/
     }
-}
-
-void Comparator::runParallel()
-{
 }
 
 void serialize(int round, double duration, std::string filename)

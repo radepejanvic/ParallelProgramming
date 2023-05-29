@@ -1,11 +1,15 @@
 #pragma once
 #include "Calculator.h"
 #include <string>
+#include <tbb/tbb.h>
+#include <tbb/task_group.h>
+#include <tbb/concurrent_vector.h>
 
 
 class Computer {
 public:
 	std::vector<float> operations = { '+' + CAST, '-' + CAST, '*' + CAST, '/' + CAST, PLUS + CAST, MINUS + CAST, MULTIPLY + CAST, DEVIDE + CAST };
+	//tbb::concurrent_vector<float> parallel_operations = { '+' + CAST, '-' + CAST, '*' + CAST, '/' + CAST, PLUS + CAST, MINUS + CAST, MULTIPLY + CAST, DEVIDE + CAST };
 	std::vector<float> numbers;
 	std::vector<float> solution;
 	float result;
@@ -21,6 +25,8 @@ public:
 	// prema principu bijekcije -> broj permutacija skupa {0,...0,1...1} = broju kombinacija sa ponavljanjem skupa brojeva
 	// 0 -> predstavlja false, 1 -> predstavlja true u ovom zapisu, u kodu se koriste bool vrednosti
 	void combinations();
+
+	void parallel_combinations();
 
 	// generisanje svih varijacija sa ponavljanjem skupa operacija na i = {1,...,5} pozicija
 	// generisanje svih permutacija vektora nums u svakoj iteraciji generisanja pojedinacne varijacije operacija

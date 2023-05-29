@@ -27,6 +27,9 @@
     <ClCompile Include="Computer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Comparator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Calculator.h">
@@ -41,12 +44,17 @@
     <ClInclude Include="Computer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Comparator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
     <None Include="Calculator.tpp">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="parallel.csv" />
+    <None Include="serial.csv" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Test.txt">
@@ -58,5 +66,8 @@
     <Text Include="Numbers.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="input.txt" />
+    <Text Include="slow.txt" />
+    <Text Include="tester.txt" />
   </ItemGroup>
 </Project>

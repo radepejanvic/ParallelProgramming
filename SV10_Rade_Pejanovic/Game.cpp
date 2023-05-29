@@ -135,7 +135,7 @@ bool Game::continuePlaying()
     while (input != 1 && input != 2) {
         if (std::cin.fail()) {
             std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
         std::cout << "-- neispravan unos --" << std::endl;
         std::cout << "\t >> ";
