@@ -53,6 +53,7 @@ void Computer::parallel_combinations() {
                 }
             }
             if (parallel_variations(combination) == result) {
+                				return;
             }
         } while (std::next_permutation(v.begin(), v.end()));
     }
